@@ -42,6 +42,7 @@ public:
 	}
 	DataBase(const DataBase&) = delete;
 	void operator=(const DataBase&) = delete;
+
 	void add(Table& t)
 	{
 		for (int i = 0; i < table_counter; i++)
@@ -74,6 +75,32 @@ public:
 		}
 		t.print_columns_data();
 	}
+
+	void deleteTable(string tableName) 
+	{
+	
+		Table* copy = new Table[table_counter];
+		if (tables != nullptr)
+		{
+			unsigned k = 0;
+			for (unsigned i = 0; i < table_counter; i++)
+			{
+				if ((tables + i)->get_name() != tableName) {
+					*(copy + k) = *(tables + i);
+					k++;
+				}
+			}
+		}
+		tables = new Table[table_counter - 1];
+		
+		for (unsigned i = 0; i < table_counter-1; i++)
+		{
+			*(tables + i) = *(copy + i);
+		}
+		table_counter--;
+		cout << "TABLE " << tableName << " DROPPED SUCCESSFULLY" << endl;
+	}
+
 	Table* get_data()
 	{
 		Table* copy = new Table[table_counter];
@@ -289,6 +316,7 @@ public:
 			t.set_name("");
 		}
 	};
+
 	class DisplayTable
 	{
 	private:
@@ -344,6 +372,74 @@ public:
 			string message = "TABLE NAMED: " + data + " NOT FOUND";
 			throw exception(message.c_str());
 		}
+
+
+	};
+	class DropTable
+	{
+	private:
+		static DropTable* instance;
+
+		DropTable() {}
+	public:
+		DropTable(const DropTable&) = delete;
+		void operator=(const DropTable&) = delete;
+		static DropTable* getInstance()
+		{
+			if (!instance)
+				instance = new DropTable;
+			return instance;
+		}
+		void run(string data)
+		{
+			if (data == "")
+			{
+				throw exception("Invalid syntax");
+			}
+
+			bool inSpaces = true;
+			int numWords = 0;
+
+			int i = 0;
+			while (data[i] != '\0')
+			{
+				if (isspace(data[i]))
+				{
+					inSpaces = true;
+				}
+				else if (inSpaces)
+				{
+					numWords++;
+					inSpaces = false;
+				}
+
+				++i;
+			}
+			if (numWords > 1)
+			{
+				throw exception("Invalid name");
+			}
+			for (int i = 0; i < DataBase::table_counter; i++)
+			{
+				if (DataBase::tables[i].get_name() == data)
+				{
+
+					//DataBase::tables[i].print();
+					/*for (int j = i+1; j < DataBase::table_counter; j++) 
+					{
+						DataBase::tables[j-1] = DataBase::tables[j];
+					}
+					DataBase::table_counter--;
+					cout << "TABLE " << data << " DROPPED" << endl;*/
+					
+					return;
+				}
+
+			}
+
+			string message = "TABLE NAMED: " + data + " NOT FOUND";
+			throw exception(message.c_str());
+		}
 	};
 
 	//DATABASE CLASS >
@@ -388,6 +484,21 @@ public:
 				{
 					cout << e.what() << endl;
 				}
+			} 
+			else if (command == "DROP TABLE")
+			{
+				DropTable* dt = dt->getInstance();
+				try
+				{
+					dt->run(command_data);
+					deleteTable(command_data);
+				}
+				catch (const std::exception& e)
+				{
+					cout << e.what() << endl;
+				}
+
+				
 			}
 		}
 	}
@@ -398,3 +509,4 @@ unsigned DataBase::table_counter = 0;
 DataBase* DataBase::instance = 0;
 DataBase::DisplayTable* DataBase::DisplayTable::instance = 0;
 DataBase::CreateTable* DataBase::CreateTable::instance = 0;
+DataBase::DropTable* DataBase::DropTable::instance = 0;
