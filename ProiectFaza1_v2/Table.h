@@ -90,6 +90,17 @@ public:
 		*(t_columns+ columns_counter) = c;
 		columns_counter++;
 	}
+	void set_column_data(int i, string s)
+	{
+		try
+		{
+			t_columns[i].add(s);
+		}
+		catch (const exception& e)
+		{
+			cout << e.what() << endl;
+		}
+	}
 	Column* get_columns()
 	{
 		Column* copy = new Column[columns_counter];

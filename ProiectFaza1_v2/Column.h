@@ -2,6 +2,7 @@
 #include "data_type.h"
 #include <iostream>
 #include <string>
+#include <sstream>
 #define _CRT_SECURE_NO_WARNINGS
 using namespace std;
 
@@ -14,6 +15,21 @@ private:
 	unsigned values_counter;
 	string default_value;
 	string* c_values;
+
+
+	bool is_number(const string& s)
+	{
+		string::const_iterator it = s.begin();
+		while (it != s.end() && isdigit(*it)) ++it;
+		return !s.empty() && it == s.end();
+	}
+
+	bool is_float(const string& s) {
+		istringstream iss(s);
+		float f;
+		iss >> noskipws >> f; 
+		return iss.eof() && !iss.fail();
+	}
 public:
 	Column()
 	{
@@ -94,6 +110,20 @@ public:
 	}
 	void add(string s)
 	{
+		if (type == data_type::NUMBER)
+		{
+			if (!is_number(s))
+			{
+				throw exception("Invalid data type! Type requested is NUMBER!");
+			}
+		}
+		if (type == data_type::FLOAT)
+		{
+			if (!is_float(s))
+			{
+				throw exception("Invalid data type! Type requested is FLOAT!");
+			}
+		}	
 		if (s.length() <= max_dim && s.length() > 0)
 		{
 			string* copy = new string[values_counter];
