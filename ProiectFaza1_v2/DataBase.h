@@ -10,6 +10,29 @@
 #include <algorithm>
 #define _CRT_SECURE_NO_WARNINGS
 using namespace std;
+int words_counter(string s)
+{
+
+	bool inSpaces = true;
+	int numWords = 0;
+
+	int i = 0;
+	while (s[i] != '\0')
+	{
+		if (isspace(s[i]))
+		{
+			inSpaces = true;
+		}
+		else if (inSpaces)
+		{
+			numWords++;
+			inSpaces = false;
+		}
+
+		++i;
+	}
+	return numWords;
+}
 
 class DataBase
 {
@@ -27,7 +50,7 @@ private:
 public:
 	static DataBase* getInstance()
 	{
-		if (!instance) 
+		if (!instance)
 		{
 			instance = new DataBase;
 			return instance;
@@ -76,9 +99,9 @@ public:
 		t.print_columns_data();
 	}
 
-	void deleteTable(string tableName) 
+	void deleteTable(string tableName)
 	{
-	
+
 		Table* copy = new Table[table_counter];
 		if (tables != nullptr)
 		{
@@ -92,8 +115,8 @@ public:
 			}
 		}
 		tables = new Table[table_counter - 1];
-		
-		for (unsigned i = 0; i < table_counter-1; i++)
+
+		for (unsigned i = 0; i < table_counter - 1; i++)
 		{
 			*(tables + i) = *(copy + i);
 		}
@@ -126,7 +149,7 @@ public:
 		string input;
 		cin >> ws;
 		getline(cin, input);
-		if (input == "EXIT" || input =="exit")
+		if (input == "EXIT" || input == "exit")
 		{
 			return false;
 		}
@@ -138,7 +161,7 @@ public:
 			command_data = inputhandler->return_command_body();
 			inputhandler->clear_input();
 		}
-		catch (const std::exception& e)
+		catch (const std::exception & e)
 		{
 			isInputValid = false;
 			cout << e.what() << endl;
@@ -180,25 +203,7 @@ public:
 					break;
 				}
 			}
-			bool inSpaces = true;
-			int numWords = 0;
-
-			int i = 0;
-			while (name[i] != '\0')
-			{
-				if (isspace(name[i]))
-				{
-					inSpaces = true;
-				}
-				else if (inSpaces)
-				{
-					numWords++;
-					inSpaces = false;
-				}
-
-				++i;
-			}
-			if (numWords > 1)
+			if (words_counter(name) > 1)
 			{
 				throw exception("Invalid name");
 			}
@@ -321,8 +326,8 @@ public:
 	{
 	private:
 		static DisplayTable* instance;
-		
-		DisplayTable(){}
+
+		DisplayTable() {}
 	public:
 		DisplayTable(const DisplayTable&) = delete;
 		void operator=(const DisplayTable&) = delete;
@@ -339,25 +344,7 @@ public:
 				throw exception("Invalid syntax");
 			}
 
-			bool inSpaces = true;
-			int numWords = 0;
-
-			int i = 0;
-			while (data[i] != '\0')
-			{
-				if (isspace(data[i]))
-				{
-					inSpaces = true;
-				}
-				else if (inSpaces)
-				{
-					numWords++;
-					inSpaces = false;
-				}
-
-				++i;
-			}
-			if (numWords > 1)
+			if (words_counter(data) > 1)
 			{
 				throw exception("Invalid name");
 			}
@@ -372,7 +359,6 @@ public:
 			string message = "TABLE NAMED: " + data + " NOT FOUND";
 			throw exception(message.c_str());
 		}
-
 
 	};
 	class DropTable
@@ -396,26 +382,7 @@ public:
 			{
 				throw exception("Invalid syntax");
 			}
-
-			bool inSpaces = true;
-			int numWords = 0;
-
-			int i = 0;
-			while (data[i] != '\0')
-			{
-				if (isspace(data[i]))
-				{
-					inSpaces = true;
-				}
-				else if (inSpaces)
-				{
-					numWords++;
-					inSpaces = false;
-				}
-
-				++i;
-			}
-			if (numWords > 1)
+			if (words_counter(data) > 1)
 			{
 				throw exception("Invalid name");
 			}
@@ -423,15 +390,7 @@ public:
 			{
 				if (DataBase::tables[i].get_name() == data)
 				{
-
-					//DataBase::tables[i].print();
-					/*for (int j = i+1; j < DataBase::table_counter; j++) 
-					{
-						DataBase::tables[j-1] = DataBase::tables[j];
-					}
-					DataBase::table_counter--;
-					cout << "TABLE " << data << " DROPPED" << endl;*/
-					
+					DataBase::getInstance()->deleteTable(data);
 					return;
 				}
 
@@ -439,6 +398,263 @@ public:
 
 			string message = "TABLE NAMED: " + data + " NOT FOUND";
 			throw exception(message.c_str());
+		}
+	};
+
+	class InsertInto
+	{
+	private:
+		static InsertInto* instance;
+
+		InsertInto() {}
+	public:
+		InsertInto(const InsertInto&) = delete;
+		void operator=(const InsertInto&) = delete;
+		static InsertInto* getInstance()
+		{
+			if (!instance)
+				instance = new InsertInto;
+			return instance;
+		}
+		void run(string command)
+		{
+			if (command == "")
+			{
+				throw exception("Invalid syntax");
+				return;
+			}
+			string name;
+			for (int i = 0; i < command.length(); i++)
+			{
+				if (command[i] != ' ' && command[i] != '(')
+				{
+					name += command[i];
+				}
+				else
+				{
+					break;
+				}
+			}
+			if (words_counter(name) > 1)
+			{
+				throw exception("Invalid name");
+			}
+			string keyWord;
+			if (command.length() - name.length() < 7)
+			{
+				throw exception("Invalid syntax");
+			}
+			if (command.length() > name.length())
+			{
+				for (int i = name.length() + 1; i < name.length() + 7; i++)
+				{
+					keyWord.push_back(command[i]);
+				}
+			}
+			else
+			{
+				throw exception("Invalid syntax");
+			}
+			if (keyWord != "VALUES")
+			{
+				throw exception("Invalid syntax");
+			}
+			if (command[name.length() + 7] != '(')
+			{
+				throw exception("Invalid syntax");
+			}
+			if (*(command.end() - 1) != ')')
+			{
+				throw exception("Invalid syntax");
+			}
+			bool isNameValid = false;
+			int foundTableIndex = 0;
+			for (int i = 0; i < DataBase::table_counter; i++)
+			{
+				if (DataBase::tables[i].get_name() == name)
+				{
+					foundTableIndex = i;
+					isNameValid = true;
+				}
+			}
+			if (!isNameValid)
+			{
+				string message = "TABLE NAMED: " + name + " NOT FOUND";
+				throw exception(message.c_str());
+			}
+			int k = name.length() + 7;
+			string data;
+			for (int i = k; i < command.length(); i++)
+			{
+				data.push_back(command[i]);
+			}
+			data.erase(remove_if(data.begin(), data.end(), isspace), data.end());
+			data.erase(data.begin());
+			data.erase(data.end() - 1);
+			vector<string> temp;
+			char* buffer = new char[data.length() + 1];
+			strcpy_s(buffer, data.length() + 1, data.c_str());
+			char* chr = strtok(buffer, ",");
+			while (chr != NULL)
+			{
+				temp.push_back(chr);
+				chr = strtok(NULL, ",");
+			}
+			for (int i = 0; i < temp.size(); i++)
+			{
+				DataBase::tables[foundTableIndex].set_column_data(i, temp[i]);
+			}
+			k = DataBase::tables[foundTableIndex].get_columns()->get_values_number();
+			if (temp.size() < k)
+			{
+				for (int i = temp.size(); i < k; i++)
+				{
+					DataBase::tables[foundTableIndex].set_column_data(i, tables[foundTableIndex].get_columns()[i].get_default_value());
+				}
+			}
+			cout << "Values inserted" << endl;
+		}
+	};
+
+	class DeleteRow
+	{
+	private:
+		static DeleteRow* instance;
+
+		DeleteRow() {}
+	public:
+		DeleteRow(const DeleteRow&) = delete;
+		void operator=(const DeleteRow&) = delete;
+		static DeleteRow* getInstance()
+		{
+			if (!instance)
+				instance = new DeleteRow;
+			return instance;
+		}
+		void run(string command)
+		{
+			if (command == "")
+			{
+				throw exception("Invalid syntax");
+				return;
+			}
+			string name;
+			for (int i = 0; i < command.length(); i++)
+			{
+				if (command[i] != ' ' && command[i] != '(')
+				{
+					name += command[i];
+				}
+				else
+				{
+					break;
+				}
+			}
+			if (words_counter(name) > 1)
+			{
+				throw exception("Invalid name");
+			}
+			string keyWord;
+			if (command.length() - name.length() < 6)
+			{
+				throw exception("Invalid syntax");
+			}
+			if (command.length() > name.length())
+			{
+				for (int i = name.length() + 1; i < name.length() + 6; i++)
+				{
+					keyWord.push_back(command[i]);
+				}
+			}
+			else
+			{
+				throw exception("Invalid syntax");
+			}
+			if (keyWord != "WHERE")
+			{
+				throw exception("Invalid syntax");
+			}
+			if (command[name.length() + 6] != ' ')
+			{
+				throw exception("Invalid syntax");
+			}
+			bool isNameValid = false;
+			int foundTableIndex = 0;
+			for (int i = 0; i < DataBase::table_counter; i++)
+			{
+				if (DataBase::tables[i].get_name() == name)
+				{
+					foundTableIndex = i;
+					isNameValid = true;
+				}
+			}
+			if (!isNameValid)
+			{
+				string message = "TABLE NAMED: " + name + " NOT FOUND";
+				throw exception(message.c_str());
+			}
+
+			int k = name.length() + 6;
+			string data;
+			for (int i = k; i < command.length(); i++)
+			{
+				data.push_back(command[i]);
+			}
+			data.erase(remove_if(data.begin(), data.end(), isspace), data.end());
+			//data.erase(data.begin());
+			//data.erase(data.end() - 1);
+			vector<string> temp;
+			char* buffer = new char[data.length() + 1];
+			strcpy_s(buffer, data.length() + 1, data.c_str());
+			char* chr = strtok(buffer, "=");
+			while (chr != NULL)
+			{
+				temp.push_back(chr);
+				chr = strtok(NULL, "=");
+			}
+			if (temp.size() > 2) {
+				throw exception("Invalid syntax");
+			}
+
+			string column_to_find = temp[0];
+			string value_to_find = temp[1];
+
+			//check column exists and found index
+
+			bool isColumnValid = false;
+			bool isValueValid = false;
+			int foundColumnIndex = 0;
+			int foundRowIndex = 0;
+
+			for (int i = 0; i < DataBase::tables[foundTableIndex].get_columns_number(); i++)
+			{
+				if (DataBase::tables[foundTableIndex].get_columns()[i].get_name() == column_to_find) 
+				{
+					foundColumnIndex = i;
+					isColumnValid = true;
+					isValueValid = DataBase::tables[foundTableIndex].get_columns()[i].check_value_exists(value_to_find);
+					if (isValueValid)
+					{
+						foundRowIndex = DataBase::tables[foundTableIndex].get_columns()[i].return_value_position(value_to_find);
+					}
+				}
+			}
+
+
+			if (!isColumnValid)
+			{
+				string message = "COLUMN NAMED: " + column_to_find + " NOT FOUND";
+				throw exception(message.c_str());
+			}
+			if (!isValueValid)
+			{
+				string message = "VALUE: " + value_to_find + " NOT FOUND";
+				throw exception(message.c_str());
+			}
+			
+			DataBase::tables[foundTableIndex].delete_value(foundRowIndex);
+			
+			cout << "Row with " + column_to_find + " = " + value_to_find + " deleted successfully!"<< endl;
 		}
 	};
 
@@ -484,25 +700,47 @@ public:
 				{
 					cout << e.what() << endl;
 				}
-			} 
+			}
 			else if (command == "DROP TABLE")
 			{
 				DropTable* dt = dt->getInstance();
 				try
 				{
 					dt->run(command_data);
-					deleteTable(command_data);
+				}
+				catch (const std::exception & e)
+				{
+					cout << e.what() << endl;
+				}
+			}
+			else if (command == "INSERT INTO")
+			{
+				InsertInto* it = it->getInstance();
+				try
+				{
+					it->run(command_data);
+				}
+				catch (const std::exception & e)
+				{
+					cout << e.what() << endl;
+				}
+			}
+			else if (command == "DELETE FROM")
+			{
+				DeleteRow* dr = dr->getInstance();
+				try
+				{
+					dr->run(command_data);
 				}
 				catch (const std::exception& e)
 				{
 					cout << e.what() << endl;
 				}
-
-				
 			}
 		}
 	}
 	friend class DisplayTable;
+	friend class Input_Handler;
 };
 Table* DataBase::tables = nullptr;
 unsigned DataBase::table_counter = 0;
@@ -510,3 +748,5 @@ DataBase* DataBase::instance = 0;
 DataBase::DisplayTable* DataBase::DisplayTable::instance = 0;
 DataBase::CreateTable* DataBase::CreateTable::instance = 0;
 DataBase::DropTable* DataBase::DropTable::instance = 0;
+DataBase::InsertInto* DataBase::InsertInto::instance = 0;
+DataBase::DeleteRow* DataBase::DeleteRow::instance = 0;
