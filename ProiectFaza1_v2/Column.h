@@ -175,6 +175,70 @@ public:
 	{
 		return name;
 	}
+
+	bool check_value_exists(string valueToFind)
+	{
+		for (int i = 0; i < values_counter; i++)
+		{
+			if (c_values[i] == valueToFind)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	//delete value from position
+	void delete_value(int position) {
+		string* copy = new string[values_counter];
+		unsigned k = 0;
+		if (c_values != nullptr)
+		{
+			for (unsigned i = 0; i < values_counter; i++)
+			{
+				if (i != position)
+				{
+					*(copy + k) = *(c_values + i);
+					k++;
+				}
+			}
+		}
+
+		for (unsigned i = 0; i < k; i++)
+		{
+			cout << copy[i] << endl;
+		}
+
+		cout << endl;
+
+
+		if (c_values != nullptr)
+		{
+			delete[] c_values;
+		}
+
+		c_values = new string[k];
+		for (unsigned i = 0; i < k; i++)
+		{
+			*(c_values + i) = *(copy + i);
+		}
+		values_counter = k;
+		
+	}
+
+	
+
+	int return_value_position(string valueToFind)
+	{
+		for (int i = 0; i < values_counter; i++)
+		{
+			if (c_values[i] == valueToFind)
+			{
+				return i;
+			}
+		}
+	}
+
 	string get_default_value()
 	{
 		return default_value;

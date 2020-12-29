@@ -82,6 +82,12 @@ public:
 
 			}
 		}
+
+		if (t_columns != nullptr)
+		{
+			delete[] t_columns;
+		}
+
 		t_columns = new Column[columns_counter + 1];
 		for (unsigned i = 0; i < columns_counter; i++)
 		{
@@ -90,6 +96,31 @@ public:
 		*(t_columns+ columns_counter) = c;
 		columns_counter++;
 	}
+
+	void delete_column(string column_name)
+	{
+		Column* copy = new Column[columns_counter];
+		if (t_columns != nullptr) {
+			unsigned k = 0;
+			for (unsigned i = 0; i < columns_counter; i++) 
+			{
+				if ((t_columns + i)->get_name() != column_name) 
+				{
+					*(copy + k) = *(t_columns + i);
+					k++;
+				}
+			}
+		}
+		t_columns = new Column[columns_counter - 1];
+		for (unsigned i = 0; i < columns_counter - 1; i++)
+		{
+			*(t_columns + i) = *(copy + i);
+		}
+		columns_counter--;
+		cout << "COLUMN " << column_name << " DELETED SUCCESSFULLY" << endl;
+
+	}
+
 	void set_column_data(int i, string s)
 	{
 		try
@@ -101,6 +132,22 @@ public:
 			cout << e.what() << endl;
 		}
 	}
+
+	void delete_value(int value)
+	{
+		try
+		{
+			for (unsigned i = 0; i < columns_counter; i++)
+			{
+				t_columns[i].delete_value(value);
+			}
+		}
+		catch (const exception& e)
+		{
+			cout << e.what() << endl;
+		}
+	}
+
 	Column* get_columns()
 	{
 		Column* copy = new Column[columns_counter];
