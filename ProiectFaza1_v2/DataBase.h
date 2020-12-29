@@ -27,7 +27,7 @@ private:
 public:
 	static DataBase* getInstance()
 	{
-		if (!instance) 
+		if (!instance)
 		{
 			instance = new DataBase;
 			return instance;
@@ -42,6 +42,7 @@ public:
 	}
 	DataBase(const DataBase&) = delete;
 	void operator=(const DataBase&) = delete;
+
 	void add(Table& t)
 	{
 		for (int i = 0; i < table_counter; i++)
@@ -74,6 +75,32 @@ public:
 		}
 		t.print_columns_data();
 	}
+
+	void deleteTable(string tableName)
+	{
+
+		Table* copy = new Table[table_counter];
+		if (tables != nullptr)
+		{
+			unsigned k = 0;
+			for (unsigned i = 0; i < table_counter; i++)
+			{
+				if ((tables + i)->get_name() != tableName) {
+					*(copy + k) = *(tables + i);
+					k++;
+				}
+			}
+		}
+		tables = new Table[table_counter - 1];
+
+		for (unsigned i = 0; i < table_counter - 1; i++)
+		{
+			*(tables + i) = *(copy + i);
+		}
+		table_counter--;
+		cout << "TABLE " << tableName << " DROPPED SUCCESSFULLY" << endl;
+	}
+
 	Table* get_data()
 	{
 		Table* copy = new Table[table_counter];
@@ -99,7 +126,7 @@ public:
 		string input;
 		cin >> ws;
 		getline(cin, input);
-		if (input == "EXIT" || input =="exit")
+		if (input == "EXIT" || input == "exit")
 		{
 			return false;
 		}
@@ -289,12 +316,13 @@ public:
 			t.set_name("");
 		}
 	};
+
 	class DisplayTable
 	{
 	private:
 		static DisplayTable* instance;
-		
-		DisplayTable(){}
+
+		DisplayTable() {}
 	public:
 		DisplayTable(const DisplayTable&) = delete;
 		void operator=(const DisplayTable&) = delete;
@@ -344,6 +372,187 @@ public:
 			string message = "TABLE NAMED: " + data + " NOT FOUND";
 			throw exception(message.c_str());
 		}
+
+	};
+	class DropTable
+	{
+	private:
+		static DropTable* instance;
+
+		DropTable() {}
+	public:
+		DropTable(const DropTable&) = delete;
+		void operator=(const DropTable&) = delete;
+		static DropTable* getInstance()
+		{
+			if (!instance)
+				instance = new DropTable;
+			return instance;
+		}
+		void run(string data)
+		{
+			if (data == "")
+			{
+				throw exception("Invalid syntax");
+			}
+
+			bool inSpaces = true;
+			int numWords = 0;
+
+			int i = 0;
+			while (data[i] != '\0')
+			{
+				if (isspace(data[i]))
+				{
+					inSpaces = true;
+				}
+				else if (inSpaces)
+				{
+					numWords++;
+					inSpaces = false;
+				}
+
+				++i;
+			}
+			if (numWords > 1)
+			{
+				throw exception("Invalid name");
+			}
+			for (int i = 0; i < DataBase::table_counter; i++)
+			{
+				if (DataBase::tables[i].get_name() == data)
+				{
+					return;
+				}
+
+			}
+
+			string message = "TABLE NAMED: " + data + " NOT FOUND";
+			throw exception(message.c_str());
+		}
+	};
+
+	class InsertInto 
+	{
+	private:
+		static InsertInto* instance;
+
+		InsertInto() {}
+	public:
+		InsertInto(const InsertInto&) = delete;
+		void operator=(const InsertInto&) = delete;
+		static InsertInto* getInstance()
+		{
+			if (!instance)
+				instance = new InsertInto;
+			return instance;
+		}
+		void run(string command)
+		{
+			if (command == "")
+			{
+				throw exception("Invalid syntax");
+				return;
+			}
+			string name;
+			for (int i = 0; i < command.length(); i++)
+			{
+				if (command[i] != '(')
+				{
+					name += command[i];
+				}
+				else
+				{
+					break;
+				}
+			}
+			bool inSpaces = true;
+			int numWords = 0;
+
+			int i = 0;
+			while (name[i] != '\0')
+			{
+				if (isspace(name[i]))
+				{
+					inSpaces = true;
+				}
+				else if (inSpaces)
+				{
+					numWords++;
+					inSpaces = false;
+				}
+
+				++i;
+			}
+			if (numWords > 1)
+			{
+				throw exception("Invalid name");
+			}
+			for (int i = 0; i < DataBase::table_counter; i++)
+			{
+				if (DataBase::tables[i].get_name() == name)
+				{
+					return;
+				}
+			}
+			string message = "TABLE NAMED: " + name + " NOT FOUND";
+			throw exception(message.c_str());
+			vector<string> data;
+			int k = name.length();
+			string str;
+			while (k < command.length())
+			{
+				str += command[k];
+				k++;
+				int last_position = command.length() - 1;
+				if (k == last_position)
+				{
+					str += ')';
+					data.push_back(str);
+					str.clear();
+				}
+			}
+			for (int i = 0; i < data.size(); i++)
+			{
+				data[i].erase(remove_if(data[i].begin(), data[i].end(), isspace), data[i].end());
+				data[i].erase(data[i].begin());
+				data[i].erase(data[i].end() - 1);
+			}
+			for (string s : data)
+			{
+				vector<string> temp;
+				char* buffer = new char[s.length() + 1];
+				strcpy_s(buffer, s.length() + 1, s.c_str());
+				char* chr = strtok(buffer, ",");
+				while (chr != NULL)
+				{
+					temp.push_back(chr);
+					chr = strtok(NULL, ",");
+				}
+				for (int i = 0; i < DataBase::table_counter; i++)
+				{
+					if (tables[i].get_name() == name)
+					{
+						if (temp.size() <= tables[i].get_columns_number())
+						{
+							for (int j = 0; j < temp.size() - 1; j++)
+							{
+								tables[i].get_columns()[j].add(temp[j]);  //in tabela noastra adauga la coloana j elementul j inserat
+							}
+							for (int j = temp.size() - 1; j < tables[i].get_columns_number(); j++)
+							{
+								tables[i].get_columns()[j].add("NULL");
+							}
+						}
+						else
+						{
+							throw exception("Invalid too many object values");
+							return;
+						}
+					}
+				}
+			}
+		}
 	};
 
 	//DATABASE CLASS >
@@ -358,7 +567,7 @@ public:
 				{
 					ct->run(command_data);
 				}
-				catch (const std::exception & e)
+				catch (const std::exception& e)
 				{
 					cout << e.what() << endl;
 				}
@@ -369,7 +578,7 @@ public:
 					{
 						add(*t);
 					}
-					catch (const std::exception & e)
+					catch (const std::exception& e)
 					{
 						cout << e.what() << endl;
 					}
@@ -384,7 +593,32 @@ public:
 				{
 					dt->run(command_data);
 				}
-				catch (const std::exception & e)
+				catch (const std::exception& e)
+				{
+					cout << e.what() << endl;
+				}
+			}
+			else if (command == "DROP TABLE")
+			{
+				DropTable* dt = dt->getInstance();
+				try
+				{
+					dt->run(command_data);
+					deleteTable(command_data);
+				}
+				catch (const std::exception& e)
+				{
+					cout << e.what() << endl;
+				}
+			}
+			else if (command == "INSERT INTO VALUES")
+			{
+				InsertInto* it = it->getInstance();
+				try
+				{
+					it->run(command_data);					
+				}
+				catch (const std::exception& e)
 				{
 					cout << e.what() << endl;
 				}
@@ -392,9 +626,12 @@ public:
 		}
 	}
 	friend class DisplayTable;
+	friend class Input_Handler;
 };
 Table* DataBase::tables = nullptr;
 unsigned DataBase::table_counter = 0;
 DataBase* DataBase::instance = 0;
 DataBase::DisplayTable* DataBase::DisplayTable::instance = 0;
 DataBase::CreateTable* DataBase::CreateTable::instance = 0;
+DataBase::DropTable* DataBase::DropTable::instance = 0;
+DataBase::InsertInto* DataBase::InsertInto::instance = 0;

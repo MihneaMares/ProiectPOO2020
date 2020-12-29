@@ -41,7 +41,7 @@ public:
 		{
 			this->max_dim = max_dim;
 		}
-		default_value = "NULL";
+		default_value = "NULL"; 
 	}
 	~Column()
 	{

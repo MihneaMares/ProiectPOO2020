@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project>
-  <ProjectOutputs>E:\Facultate Manu\An 2 semestru 1\POO\seminar\proiect\ProiectFaza1_v2\Debug\ProiectFaza1_v2.exe</ProjectOutputs>
-  <ContentFiles></ContentFiles>
-  <SatelliteDlls></SatelliteDlls>
-  <NonRecipeFileRefs></NonRecipeFileRefs>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\Debug\ProiectFaza1_v2.exe</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles />
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
 </Project>

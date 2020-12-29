@@ -1,1 +1,30 @@
-﻿  ProiectFaza1_v2.vcxproj -> E:\Facultate Manu\An 2 semestru 1\POO\seminar\proiect\ProiectFaza1_v2\Debug\ProiectFaza1_v2.exe
+﻿  Source.cpp
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\Column.h(5,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\Source.cpp : message : see previous definition of '_CRT_SECURE_NO_WARNINGS'
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\Column.h(97,18): warning C4018: '<=': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\Source.cpp(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\Input_Handler.h(64,21): warning C4018: '<': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\Input_Handler.h(85,21): warning C4018: '<': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\Input_Handler.h(106,42): warning C4018: '<': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\Input_Handler.h(118,64): warning C4018: '<': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\Input_Handler.h(130,85): warning C4018: '<': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\Input_Handler.h(170,27): warning C4018: '<': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\Input_Handler.h(180,27): warning C4018: '<': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\Input_Handler.h(189,27): warning C4018: '<': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\DataBase.h(48,21): warning C4018: '<': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\DataBase.h(172,22): warning C4018: '<': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\DataBase.h(208,13): warning C4018: '<': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\DataBase.h(212,23): warning C4018: '<': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\DataBase.h(235,22): warning C4018: '<': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\DataBase.h(281,23): warning C4018: '<': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\DataBase.h(364,22): warning C4018: '<': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\DataBase.h(421,22): warning C4018: '<': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\DataBase.h(458,22): warning C4018: '<': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\DataBase.h(491,22): warning C4018: '<': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\DataBase.h(503,13): warning C4018: '<': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\DataBase.h(515,22): warning C4018: '<': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\DataBase.h(532,23): warning C4018: '<': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\DataBase.h(538,26): warning C4018: '<': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\DataBase.h(542,40): warning C4018: '<': signed/unsigned mismatch
+D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\ProiectFaza1_v2\DataBase.h(35): warning C4715: 'DataBase::getInstance': not all control paths return a value
+  ProiectFaza1_v2.vcxproj -> D:\Facultate online\Anul II\Semestrul I\POO\Seminar-Bogdan Iancu\ProiectFaza1_v2\Debug\ProiectFaza1_v2.exe
