@@ -1,1 +1,34 @@
-﻿  ProiectFaza1_v2.vcxproj -> E:\Facultate Manu\An 2 semestru 1\POO\seminar\proiect\ProiectFaza1_v2\Debug\ProiectFaza1_v2.exe
+﻿  Source.cpp
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\Column.h(6,1): warning C4005: '_CRT_SECURE_NO_WARNINGS': macro redefinition
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\Source.cpp : message : see previous definition of '_CRT_SECURE_NO_WARNINGS'
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\Column.h(127,18): warning C4018: '<=': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\Column.h(181,21): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\Column.h(233,21): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\Source.cpp(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\Input_Handler.h(64,21): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\Input_Handler.h(85,21): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\Input_Handler.h(106,42): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\Input_Handler.h(146,27): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\Input_Handler.h(155,27): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\DataBase.h(71,21): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\DataBase.h(195,22): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\DataBase.h(213,13): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\DataBase.h(217,23): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\DataBase.h(240,22): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\DataBase.h(286,23): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\DataBase.h(351,22): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\DataBase.h(389,22): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\DataBase.h(427,22): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\DataBase.h(449,39): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\DataBase.h(472,22): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\DataBase.h(487,22): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\DataBase.h(503,22): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\DataBase.h(508,20): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\DataBase.h(542,22): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\DataBase.h(564,39): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\DataBase.h(583,22): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\DataBase.h(602,22): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\DataBase.h(632,22): warning C4018: '<': signed/unsigned mismatch
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\DataBase.h(58): warning C4715: 'DataBase::getInstance': not all control paths return a value
+D:\facultate\poo\ProiectPOO2020\ProiectFaza1_v2\Column.h(240): warning C4715: 'Column::return_value_position': not all control paths return a value
+  ProiectFaza1_v2.vcxproj -> D:\facultate\poo\ProiectPOO2020\Debug\ProiectFaza1_v2.exe
