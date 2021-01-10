@@ -1,0 +1,111 @@
+int main()
+{
+	bd.actualizare_date();
+	string s;
+	//getline(cin, s);
+	string comanda;
+	string continut;
+	string denumire_tabela;
+	int nr_coloane_introduse;
+	string continut_important_update_delete;
+	ifstream f;
+	//f >> s;
+	//getline(f, s);
+	//cout << s;
+
+	string modalitate_input;
+	cout << endl << "Introduceti modalitatea de input: ";
+	getline(cin, modalitate_input);
+	while (modalitate_input != "stop")
+	{
+
+		if (modalitate_input == "tastatura")
+		{
+			getline(cin, s);
+		}
+		else if (modalitate_input == "fisier")
+		{
+			cout << endl << "Introduceti numele fisierului: ";
+			string nume_fisier;
+			cin >> ws;
+			getline(cin, nume_fisier);
+			f.open(nume_fisier);
+			getline(f, s);
+		}
+
+		while (s != "exit"&&!f.eof())
+		{
+			comanda = identificare_comanda(s);
+			continut = continut_important(s);
+			denumire_tabela = nume_tabela(s, comanda, continut);
+			nr_coloane_introduse = nr_coloane_tabela(continut);
+			continut_important_update_delete = continut_update_delete(s, denumire_tabela);
+			if (comanda == "")
+			{
+				cout << "comanda gresita";
+			}
+			else
+			{
+				cout << endl << "comanda identificata este: " << comanda << endl;
+				cout << "continutul ce urmeaza sa fie prelucrat este: " << endl << continut << endl;
+				cout << "numele tabelei este: " << denumire_tabela << endl;
+				cout << "continutul important din update/delete este: " << continut_important_update_delete << endl;
+			}
+			if (comanda == "create table ")
+			{
+
+				create_table(denumire_tabela, continut, nr_coloane_introduse);
+
+			}
+			if (comanda == "display table ")
+			{
+				display_table(denumire_tabela);
+			}
+			if (comanda == "insert into values ")
+			{
+				insert_into_values(denumire_tabela, continut);
+			}
+			if (comanda == "select all from ")
+			{
+				select_all_from(denumire_tabela);
+			}
+			if (comanda == "drop table ")
+			{
+				drop_table(denumire_tabela);
+			}
+			if (comanda == "update set where ")
+			{
+				update_set_where(denumire_tabela, continut_important_update_delete);
+			}
+			if (comanda == "delete from where ")
+			{
+				delete_from_where(denumire_tabela, continut_important_update_delete);
+			}
+
+			
+			}
+		if (modalitate_input == "tastatura")
+		{
+			cout << endl << "Introduceti noua comanda:" << endl;
+			getline(cin, s);
+		}
+		else if (modalitate_input == "fisier")
+		{
+			cout << endl << "Introduceti numele fisierului: ";
+			string nume_fisier;
+			cin >> ws;
+			getline(cin, nume_fisier);
+			f.open(nume_fisier);
+			getline(f, s);
+		}
+
+		cout << endl << "Introduceti noua modalitate: ";
+		getline(cin, modalitate_input);
+
+	}
+	//f.close();
+
+	bd.scriere_date();
+
+
+}
