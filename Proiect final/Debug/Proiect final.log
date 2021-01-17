@@ -1,0 +1,5 @@
+﻿  Source.cpp
+E:\Facultate Manu\An 2 semestru 1\POO\seminar\Arhive proiecte\Proiect final\Proiect final\BazaDeDate.h(960,22): warning C4018: '>': signed/unsigned mismatch
+E:\Facultate Manu\An 2 semestru 1\POO\seminar\Arhive proiecte\Proiect final\Proiect final\BazaDeDate.h(1231,29): warning C4018: '>': signed/unsigned mismatch
+E:\Facultate Manu\An 2 semestru 1\POO\seminar\Arhive proiecte\Proiect final\Proiect final\BazaDeDate.h(1618,21): warning C4390: ';': empty controlled statement found; is this the intent?
+  Proiect final.vcxproj -> E:\Facultate Manu\An 2 semestru 1\POO\seminar\Arhive proiecte\Proiect final\Debug\Proiect final.exe
