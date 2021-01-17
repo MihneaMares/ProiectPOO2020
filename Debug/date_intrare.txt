@@ -1,0 +1,6 @@
+create table muncitori ((nume,text,20,ion),(varsta,number,3,18))
+create table oameni ((nume,text,20,ion))
+create table maestri ((nume,text,20,ion),(prenume,text,20,vasile),(varsta,number,3,18))
+create table angajati ((nume,text,20,ion),(varsta,number,3,18))
+create table cetateni ((nume,text,20,ion),(prenume,text,20,vasile),(varsta,number,3,18),(adresa,text,20,oras),(telefon,number,10,0))
+ultima linie
